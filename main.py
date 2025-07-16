@@ -23,15 +23,15 @@ def Combate(nome,vJogadores,vInimigos):
   print("\n\t-=-Combate Iniciado-=-")
   jogador = vJogadores[nome]
   inimigo = strgerador_inimigos()
-  print("\n\tSeu Inimigo é: ", inimigo["nome"])
+  print("\n\tSeu Inimigo é: ", inimigo['nome'])
 
-  while jogador["Atributos"]["vida"] > 0 and inimigo["vida"].copy() > 0:
-    print(f"\n\t-=-{jogador["Nome"]}-=-")
-    print("\n\tVida: ",jogador["Atributos"]["vida"])
-    print("\tAtaque: ",jogador["Atributos"]["ataque"])
-    print(f"\n\t-=-Inimigo {inimigo["nome"]}-=-")
-    print("\n\tVida: ",inimigo["vida"])
-    print("\tAtaque: ",inimigo["ataque"])
+  while jogador['Atributos']['vida'] > 0 and inimigo['vida'].copy() > 0:
+    print(f"\n\t-=-{jogador['Nome']}-=-")
+    print("\n\tVida: ",jogador['Atributos']['vida'])
+    print("\tAtaque: ",jogador['Atributos']['ataque'])
+    print(f"\n\t-=-Inimigo {inimigo['nome']}-=-")
+    print("\n\tVida: ",inimigo['vida'])
+    print("\tAtaque: ",inimigo['ataque'])
 
     Inicio = random.randint(0,1)
     if Inicio == 0:
@@ -97,31 +97,40 @@ def Combate(nome,vJogadores,vInimigos):
       print("\n\t!VOCE MORREU!")
     
     else:
+
       print("INIMIGO DERROTADO")
       print(f"Jogador Adquiriu {inimigo['xp']}")
       jogador['xp'] += inimigo['xp']
-      
+      jogador['Inimigos'] += 1
+      goldmonster = random.randint(0,inimigo['gold'])
+      print(f"Jogador Adquiriu {goldmonster}")
+      jogador['Gold'] += goldmonster
+      print(f"XP Atual: {jogador['xp']}")
+      print(f"Gold Atual: {jogador['Gold']}")
+
+    salvar("jogadores.json",vJogadores)
+  print("\n\t-=-Combate Finalizado-=-")
 
 def exploracao():
   
   Ambiente = ["Dangeon", "Floresta", "Campos Escuros", "Casa Abandonada"]
+
   Situacoes = ["Acho Inimigo!" , "Nada Aconteceu" , "Achou um Item", "Caiu em uma Armadilha"]
-
-
-
+  resultado = random.choide(Situacoes)
+  
+  return resultado
 def gerador_inimigos(vInimigos):
   num = random.radint(0,len(vInimigos))
   vInimigos[str(num)]:{
       
-                  "1" : {"nome" : "Zumbi",        "vida" : 10 , "ataque" : 5, "xp" : 10},
-                  "2" : {"nome" : "Esqueleto",    "vida" : 15 , "ataque" : 10,"xp" : 10},
-                  "3" : {"nome" : "Mago Sombrio", "vida" : 20 , "ataque" : 15,"xp" : 10},
-                  "4" : {"nome" : "Bandido",      "vida" : 25 , "ataque" : 20,"xp" : 10},
-                  "5" : {"nome" : "Louco",        "vida" : 30 , "ataque" : 25,"xp" : 10}
+                  "1" : {"nome" : "Zumbi",        "vida" : 10 , "ataque" : 5, "xp" : 10, "gold" : 0},
+                  "2" : {"nome" : "Esqueleto",    "vida" : 15 , "ataque" : 10,"xp" : 10, "gold" : 0},
+                  "3" : {"nome" : "Mago Sombrio", "vida" : 20 , "ataque" : 15,"xp" : 10, "gold" : 0},
+                  "4" : {"nome" : "Bandido",      "vida" : 25 , "ataque" : 20,"xp" : 10, "gold" : 0},
+                  "5" : {"nome" : "Louco",        "vida" : 30 , "ataque" : 25,"xp" : 10, "gold" : 0}
 
   }
-  return vInimigos[str(num)]
-
+  return vInimigos[str(num)].copy()
 def itens():
   vItens = {
       "1" : {"nome" : "Pocao de Cura"   , "Cura"   : 20},
@@ -145,16 +154,14 @@ def ficha_jogador(vJogadores,nome):
   print("\tClasse: ",vJogadores[nome]["Classe"])
   print("\tVida: "  ,vJogadores[nome]["Atributos"]["vida"])
   print("\tAtaque: ",vJogadores[nome]["Atributos"]["ataque"])
-
 def porcurar_jogador(vJogadores):
   nome = input("Nome do Jogador: ")
   while nome.isalpha() != True or len(nome) < 0:
     nome = input("Valor Inválido\nNome do Jogador: ")
   if nome in vJogadores:
-    ficha_jogador(nome)
+    ficha_jogador(vJogadores,nome)
   else:
     print("\n\t-=- Jogador Não Encontrado -=-\n")
-
 def listar_jogadores():
   print("\n\tLista de Jogadores: ")
   i = 0
@@ -163,14 +170,12 @@ def listar_jogadores():
     print(vJogadores[i]["Idade"])
     print(vJogadores[i]["Classe"])
     i = i + 1
-
 def opcoesdeclasse():
   print("\n\tClasse do Jogador: ")
   print("\t1. Guerreiro")
   print("\t2. Mago")
   print("\t3. Assasino")
   print("\t4. Arqueiro")
-
 def cad_player(vJogadores,vClasses,vSkills):
   nome = input("Nome do Jogador: ")
   while nome.isalpha() != True or len(nome) < 0:
@@ -258,7 +263,9 @@ def cad_player(vJogadores,vClasses,vSkills):
         "lvl"   : 1,
         "Classe" : classe,
         "Skills" : vSkills[classe].copy(),
-        "Atributos" : vClasse[classe].copy()
+        "Atributos" : vClasse[classe].copy(),
+        "Inimigos" : 0,
+        "Itens" : []
   }
 
   salvar("jogadores.json",vJogadores)
@@ -266,7 +273,6 @@ def cad_player(vJogadores,vClasses,vSkills):
   salvar("skills.json",vSkills)
 
   print("\n\t-=- Jogador Cadastrado -=-\n")
-
 
 
 def menu():
@@ -299,6 +305,7 @@ def main():
           nome = input("Nome do Jogador: ")
         else:
           nome = input("Valor Inválido\nNome do Jogador: ")
+
 
     
     if op == 2:
