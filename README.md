@@ -28,7 +28,7 @@ Projeto desenvolvido em **Python** para praticar lógica de programação, manip
     ├── ambiente.json        # Ambientes de exploração (planejado)
     ├── skills.json          # Skills por classe
 
-**##⚙️ Tecnologias**
+**⚙️ Tecnologias**
 
 -Python 3
 
@@ -38,7 +38,7 @@ Projeto desenvolvido em **Python** para praticar lógica de programação, manip
 
 -Funções e modularização do código
 
-**##🎯 Objetivos de Aprendizado**
+**🎯 Objetivos de Aprendizado**
 
 -Consolidação de lógica de programação
 
@@ -48,7 +48,7 @@ Projeto desenvolvido em **Python** para praticar lógica de programação, manip
 
 -Simulação de mecânicas básicas de RPG
 
-**##🚧 Melhorias Futuras**
+##🚧 Melhorias Futuras
 -Sistema completo de exploração e ambientes
 
 -Inventário e sistema de itens
@@ -59,7 +59,7 @@ Projeto desenvolvido em **Python** para praticar lógica de programação, manip
 
 -Interface gráfica (GUI)
 
-**##✅ Como Executar**
+#**✅ Como Executar**
 ***Clone o repositório:***
 
 -git clone https://github.com/seu-usuario/rpg_terminal.git
