@@ -1,3 +1,48 @@
+🗂️ CHANGELOG - Versão 3.0
+
+    -2025-07-17	3.0	Expansão do sistema de RPG: melhorias em combate, itens, inventário, exploração e progressão do jogador.
+
+✅ Novas Funcionalidades / Melhorias
+
+    -Sistema de Uso de Itens dentro do Combate
+    -O jogador agora pode optar por usar itens em vez de atacar.
+    -Itens de cura e ataque aplicam efeitos diretamente durante o combate.
+    -Implementada opção de cancelar o uso do item.
+    -Consumo e Gerenciamento de Itens
+    -Itens são removidos do inventário após uso.
+    -Validação se o item existe antes do uso.
+    -Feedback visual de item consumido ou não encontrado.
+    -Sistema de Defesa Parcial (Estruturado nos Itens)
+    -Adição do item "Escudo" com atributo de defesa (ainda não aplicado no cálculo de combate, mas preparado).
+    -Exploração Refinada
+    -Armadilhas agora acumulam um contador (arm) e só causam dano após um número aleatório de ativações.
+    -Dano das armadilhas é aleatório entre 1 e 10 de vida.
+    -Incrementos Narrativos e Ambientação
+    -Mensagens narrativas aprimoradas: "Você sente uma presença...", "Você vê algo brilhando...".
+    -Adicionado delay (time.sleep) para simular suspense e fluidez no jogo.
+    -Aprimoramento na Exibição de Status
+    -Ficha do jogador agora exibe inimigos derrotados.
+    -Melhoria na Modularização
+    -Adição de função Game_Inputs centralizando os inputs de comando (Mover, Status, Itens).
+    -Validação reforçada para evitar opções inválidas em diversas escolhas.
+    -Otimização do Sistema de Level Up
+    -XP para o próximo nível definido por multiplicação do nível atual por 10.
+    -Subida de nível aumenta vida e ataque em 20%.
+
+✅ Ajustes Técnicos e de Organização
+
+    -Uso de .copy() ao carregar inimigos, classes e skills para evitar mutação global de referências.
+    -Salvamento do progresso dos jogadores após todas as operações importantes.
+    -Inclusão de marcação de regiões do código para melhor organização.
+
+❌ Pontos Preparados mas Não Implementados
+
+    -O atributo de "Defesa" do escudo ainda não está integrado ao cálculo de dano.
+    -Sistema de ambiente ainda pendente (vAmbiente é carregado mas não usado).
+    -Sistema de missões, história ou objetivos ainda não introduzido.
+
+
+
 **🗂️ CHANGELOG - Versão 2.0**
 
 ***🔥 Novas Funcionalidades***
