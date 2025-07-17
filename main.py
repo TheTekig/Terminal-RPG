@@ -1,6 +1,8 @@
 import os
 import json
-import random 
+import random
+import time
+
 #region SAVE/LOAD
 
 def save(nomeArquivo,lista):
@@ -33,30 +35,37 @@ def Combate(nome,vJogadores,vInimigos):
     print("\n\tVida: ",inimigo['vida'])
     print("\tAtaque: ",inimigo['ataque'])
 
+    time.sleep(0.5)
+
     Inicio = random.randint(0,1)                                           #Numero Random para decidir quem sera o atacante
+
+    time.sleep(0.5)
+
     if Inicio == 0:
       print("\n\t-=-Sua Vez-=-")
       print("-" * 50)
       print(f"//O Ataque do jogador vai escalionar com a Skill")
       print("-" * 50)
-      print("A - ATTACK / I - ITENS")
+      print("\tA - ATTACK / I - ITENS")
       print("-" * 50)
+      
       op = input("--->")
-        while op.upper() not in ["I","A"]:
-          op = input("Valor Invalido \n---> ")
-      if op == "A":
+      while op.upper() not in ["I","A"]:
+        op = input("Valor Invalido \n---> ")
+        
+      if op.upper() == "A":
         print("Escolha o seu Ataque:")
         print(f"{jogador['Skills']}")
-  
+
         op = input("Skill: ")
         while op not in jogador['Skills']:
           op = input("Skills Inesistentes\nSkill: ")
-  
+
         #region Aleatoridade/DanoJogador
   
         ataque = jogador['Atributos']['ataque'] * jogador['Skills'][op]         #Escalabilidade do ataque
         missChance = random.randint(0,100)                                      #Gera o numero que sera usado de parametro para definir acertividade do ataque
-  
+        time.sleep(0.5)
         if missChance < 5:
           inimigo['vida'] -= ataque * 1.5
           print("Dano :" , ataque * 1.5)
@@ -77,20 +86,39 @@ def Combate(nome,vJogadores,vInimigos):
           inimigo['vida'] -= 0
           print(f"\t!INIMIGO DESVIOU!\nVida Atual do Inimigo - {inimigo['vida']}")
           
+          
           #endregion
       else:
         print("-" * 50)
         print(f"{jogador['Itens']}")
-        print("Escolha seu Item:")
-        item = input("---> ")
-        while op not in jogador['Itens']:
-          item = input("Item nao encontrado\n---> ")
-        if item == jogador['Itens']['Pocao de Cura']:
-          jogador['Atributos']['vida'] += jogador['Itens']['Pocao de Cura']
-          jogador['Itens']['Pocao de Cura'].pop()
-        else item == jogador['Itens'][item]:
-          jogador['Atributos']['ataque'] *= jogador['Itens'][item]
-        print("-" * 50)
+        print("Escolha seu Item (ou digite 0 para cancelar):")
+
+        item_nome = input("---> ")
+
+        if item_nome == "0":
+            acao = Game_Inputs()
+        else:
+            item_encontrado = None
+            for i in jogador['Itens']:
+                if i['nome'] == item_nome:
+                    item_encontrado = i
+                    break
+
+            if item_encontrado:
+                if 'Cura' in item_encontrado:
+                    jogador['Atributos']['vida'] += item_encontrado['Cura']
+                    print(f"Você recuperou {item_encontrado['Cura']} de vida!")
+                
+                elif 'Ataque' in item_encontrado:
+                    jogador['Atributos']['ataque'] *= item_encontrado['Ataque']
+                    print(f"Ataque multiplicado por {item_encontrado['Ataque']}!")
+                
+                # Pode adicionar mais efeitos aqui se necessário
+
+                jogador['Itens'].remove(item_encontrado)
+                print("Item consumido!")
+            else:
+                print("Item não encontrado.")
     else:
       print("\n\t-=-Inimigo Vez-=-")
 
@@ -104,7 +132,7 @@ def Combate(nome,vJogadores,vInimigos):
       if missChance < 5:
         jogador['Atributos']['vida'] -= ataque * 1.5
         print("Dano :" , ataque * 1.5)
-        print(f"\t!DANO CRITICO!\nVida Atual do Inimigo - {jogador['vida']}")
+        print(f"\t!DANO CRITICO!\nVida Atual do Jogador - {jogador['vida']}")
       elif missChance < 30:
         jogador['Atributos']['vida'] -= ataque
         print("Dano :" , ataque)
@@ -119,7 +147,7 @@ def Combate(nome,vJogadores,vInimigos):
         print(f"\t!DANO MEDIOCRE!\nVida Atual do Jogador - {jogador['Atributos']['vida']}")
       else:
         jogador['Atributos']['vida'] -= 0
-        print(f"\t!INIMIGO DESVIOU!\nVida Atual do Jogador - {jogador['Atributos']['vida']}")
+        print(f"\t!JOGADOR DESVIOU!\nVida Atual do Jogador - {jogador['Atributos']['vida']}")
 
       #endregion
 
@@ -153,7 +181,8 @@ def Combate(nome,vJogadores,vInimigos):
 def Level_up(vJogadores,nome):                                           #Sistema de LevelUp
 
   jogador = vJogadores[nome]
-  if jogador['xp'] >= 10:
+  XPnextLevel = jogador['lvl'] * 10
+  if jogador['xp'] >= XPnextLevel:
     jogador['lvl'] += 1
     jogador['Atributos']['vida'] *= 1.2                                    #Multiplicador de atributos do jogador por nivel subido (obs: Provavelmente vou alterar para que o nivel de xp necessario escale com o nvl subido)
     jogador['Atributos']['ataque'] *= 1.2
@@ -224,8 +253,39 @@ def controlador(vJogadores,nome,arm,vItens,vInimigos):                   #Contro
       acao = Game_Inputs()
 
     if acao == "I":
-      print(f"\n\t-=-Itens-=-\n{vJogadores[nome]['Itens']}")
-      acao = Game_Inputs()
+      jogador = vJogadores[nome]
+      print("-" * 50)
+      print(f"{jogador['Itens']}")
+      print("Escolha seu Item (ou digite 0 para cancelar):")
+
+      item_nome = input("---> ")
+
+      if item_nome == "0":
+          acao = Game_Inputs()
+      else:
+          item_encontrado = None
+          for i in jogador['Itens']:
+              if i['nome'] == item_nome:
+                  item_encontrado = i
+                  break
+
+          if item_encontrado:
+              if 'Cura' in item_encontrado:
+                  jogador['Atributos']['vida'] += item_encontrado['Cura']
+                  print(f"Você recuperou {item_encontrado['Cura']} de vida!")
+              
+              elif 'Ataque' in item_encontrado:
+                  jogador['Atributos']['ataque'] *= item_encontrado['Ataque']
+                  print(f"Ataque multiplicado por {item_encontrado['Ataque']}!")
+              
+              # Pode adicionar mais efeitos aqui se necessário
+
+              jogador['Itens'].remove(item_encontrado)
+              print("Item consumido!")
+          else:
+              print("Item não encontrado.")
+
+    save("jogadores.json",vJogadores)    
   print("Saindo...")
 
 def gerador_inimigos(vInimigos):                                          #Escolhe um Inimigo do Dicionario de Inimigos
@@ -260,7 +320,7 @@ def Listas_Dicionarios():                                                 #Lista
       
       "Guerreiro" : {"Slash" : 1.5 , "Porrada" : 1.1 , "Aumentar Defesa" : 1.2},
       "Mago"      : {"Bola de Fogo" : 1.5 , "Cajadada" : 0.9 , "Enfraquecimento" : 5},
-      "Assasino"  : {"Corte Profundo" : 1.4  , "Ataque Escondido" : 1.2 , "Ataque baixo" : 1.7},
+      "Assassino"  : {"Corte Profundo" : 1.4  , "Ataque Escondido" : 1.2 , "Ataque baixo" : 1.7},
       "Arqueiro"  : {"Flecha Comum" : 1.1 , "Flecha com efeito" : 1.3, "Flecha Explosiva" : 1.5}    
                      
     }
@@ -269,7 +329,7 @@ def Listas_Dicionarios():                                                 #Lista
       
       "Guerreiro" : {"vida" : 20 , "ataque" : 5 },
       "Mago"      : {"vida" : 10 , "ataque" : 15},
-      "Assasino"  : {"vida" : 5  , "ataque" : 20},
+      "Assassino"  : {"vida" : 5  , "ataque" : 20},
       "Arqueiro"  : {"vida" : 15 , "ataque" : 10}
 
     }
@@ -277,6 +337,7 @@ def Listas_Dicionarios():                                                 #Lista
     save("classe.json",vClasse)
     save("inimigos.json",vInimigos)
     save("itens.json",vItens)
+    save("skills.json",vSkills)
 
 #region CADASTRO/FUNCOES DE MENU
 
@@ -315,7 +376,7 @@ def opcoesdeclasse():
   print("\n\tClasse do Jogador: ")
   print("\t1. Guerreiro")
   print("\t2. Mago")
-  print("\t3. Assasino")
+  print("\t3. Assassino")
   print("\t4. Arqueiro")
 
 def cad_player(vJogadores,vClasse,vSkills):                               #Cadastro Player
@@ -330,58 +391,32 @@ def cad_player(vJogadores,vClasse,vSkills):                               #Cadas
     idade = input("Valor Inválido\nIdade do Jogador: ")
 
   #endregion
-  
-  opcoesdeclasse()        #Mostra cada tipo de Classe
-  op = op_()
-
-  if op == 1:
-
-    print("\n\tGuerreiro\n-Possui Mais Vida\n-Ataque mais Equilibrado")
-    print("Deseja Escolher essa classe? (S/N)")                              #Confirmacao se Deseja fazer a acao
-    op = input("Digito: ")
-    while op.upper() != "S" and op.upper() != "N":
-      op = input("Valor Inválido\nDigito: ")
-    if op.upper() == "S":
-      classe = "Guerreiro"
-    else:
+          
+  while True:       #Mostra cada tipo de Classe
+     
       opcoesdeclasse()
       op = op_()
 
-  elif op == 2:
-    print("\n\tMago\n-Possui Vida Mediana\n-Aprende mais magias\n-Dano um pouco maior")
-    print("Deseja Escolher essa classe? (S/N)")
-    op = input("Digito: ")
-    while op.upper() != "S" and op.upper() != "N":
-      op = input("Valor Inválido\nDigito: ")
-    if op.upper() == "S":
-      classe = "Mago"
-    else:
-      opcoesdeclasse()
-      op = op_()
+      if op == 1:
+          classe = "Guerreiro"
+          descricao = "-Possui Mais Vida\n-Ataque Equilibrado"
+      elif op == 2:
+          classe = "Mago"
+          descricao = "-Vida Mediana\n-Aprende magias\n-Dano um pouco maior"
+      elif op == 3:
+          classe = "Assassino"
+          descricao = "-Vida Baixa\n-Ataque Muito Alto"
+      elif op == 4:
+          classe = "Arqueiro"
+          descricao = "-Vida e Ataque Equilibrados"
 
-  elif op == 3:
-    print("\n\tAssasino\n-Vida Baixa\n-Ataque absurdo de alto")
-    print("Deseja Escolher essa classe? (S/N)")
-    op = input("Digito: ")
-    while op.upper() != "S" and op.upper() != "N":
-      op = input("Valor Inválido\nDigito: ")
-    if op.upper() == "S":
-      classe = "Assasino"
-    else:
-      opcoesdeclasse()
-      op = op_()
+      print(f"\n\t{classe}\n{descricao}")
+      confirmacao = input("Deseja Escolher essa classe? (S/N): ").upper()
+      while confirmacao not in ["S", "N"]:
+          confirmacao = input("Valor Inválido\nDeseja Escolher essa classe? (S/N): ").upper()
 
-  else:
-    print("\n\tArqueiro\n-Vida Equilibrada\n-Ataque Equilibrado")
-    print("Deseja Escolher essa classe? (S/N)")
-    op = input("Digito: ")
-    while op.upper() != "S" and op.upper() != "N":
-      op = input("Valor Inválido\nDigito: ")
-    if op.upper() == "S":
-      classe = "Arqueiro"
-    else:
-      opcoesdeclasse()
-      op = op_()
+      if confirmacao == "S":
+          break
 
 ################################################      
             #Dicionario Principal#
