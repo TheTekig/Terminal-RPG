@@ -39,40 +39,58 @@ def Combate(nome,vJogadores,vInimigos):
       print("-" * 50)
       print(f"//O Ataque do jogador vai escalionar com a Skill")
       print("-" * 50)
-      print("Escolha o seu Ataque:")
-      print(f"{jogador['Skills']}")
-
-      op = input("Skill: ")
-      while op not in jogador['Skills']:
-        op = input("Skills Inesistentes\nSkill: ")
-
-      #region Aleatoridade/DanoJogador
-
-      ataque = jogador['Atributos']['ataque'] * jogador['Skills'][op]         #Escalabilidade do ataque
-      missChance = random.randint(0,100)                                      #Gera o numero que sera usado de parametro para definir acertividade do ataque
-
-      if missChance < 5:
-        inimigo['vida'] -= ataque * 1.5
-        print("Dano :" , ataque * 1.5)
-        print(f"\t!DANO CRITICO!\nVida Atual do Inimigo - {inimigo['vida']}")
-      elif missChance < 30:
-        inimigo['vida'] -= ataque
-        print("Dano :" , ataque)
-        print(f"\t!DANO EM CHEIO!\nVida Atual do Inimigo - {inimigo['vida']}")
-      elif missChance < 50:
-        inimigo['vida'] -= ataque / 2
-        print("Dano :" , ataque / 2)
-        print(f"\t!DANO RASPAO!\nVida Atual do Inimigo - {inimigo['vida']}")
-      elif missChance < 70:
-        inimigo['vida'] -= ataque / 4
-        print("Dano :", ataque / 4)
-        print(f"\t!DANO MEDIOCRE!\nVida Atual do Inimigo - {inimigo['vida']}")
+      print("A - ATTACK / I - ITENS")
+      print("-" * 50)
+      op = input("--->")
+        while op.upper() not in ["I","A"]:
+          op = input("Valor Invalido \n---> ")
+      if op == "A":
+        print("Escolha o seu Ataque:")
+        print(f"{jogador['Skills']}")
+  
+        op = input("Skill: ")
+        while op not in jogador['Skills']:
+          op = input("Skills Inesistentes\nSkill: ")
+  
+        #region Aleatoridade/DanoJogador
+  
+        ataque = jogador['Atributos']['ataque'] * jogador['Skills'][op]         #Escalabilidade do ataque
+        missChance = random.randint(0,100)                                      #Gera o numero que sera usado de parametro para definir acertividade do ataque
+  
+        if missChance < 5:
+          inimigo['vida'] -= ataque * 1.5
+          print("Dano :" , ataque * 1.5)
+          print(f"\t!DANO CRITICO!\nVida Atual do Inimigo - {inimigo['vida']}")
+        elif missChance < 30:
+          inimigo['vida'] -= ataque
+          print("Dano :" , ataque)
+          print(f"\t!DANO EM CHEIO!\nVida Atual do Inimigo - {inimigo['vida']}")
+        elif missChance < 50:
+          inimigo['vida'] -= ataque / 2
+          print("Dano :" , ataque / 2)
+          print(f"\t!DANO RASPAO!\nVida Atual do Inimigo - {inimigo['vida']}")
+        elif missChance < 70:
+          inimigo['vida'] -= ataque / 4
+          print("Dano :", ataque / 4)
+          print(f"\t!DANO MEDIOCRE!\nVida Atual do Inimigo - {inimigo['vida']}")
+        else:
+          inimigo['vida'] -= 0
+          print(f"\t!INIMIGO DESVIOU!\nVida Atual do Inimigo - {inimigo['vida']}")
+          
+          #endregion
       else:
-        inimigo['vida'] -= 0
-        print(f"\t!INIMIGO DESVIOU!\nVida Atual do Inimigo - {inimigo['vida']}")
-        
-        #endregion
-
+        print("-" * 50)
+        print(f"{jogador['Itens']}")
+        print("Escolha seu Item:")
+        item = input("---> ")
+        while op not in jogador['Itens']:
+          item = input("Item nao encontrado\n---> ")
+        if item == jogador['Itens']['Pocao de Cura']:
+          jogador['Atributos']['vida'] += jogador['Itens']['Pocao de Cura']
+          jogador['Itens']['Pocao de Cura'].pop()
+        else item == jogador['Itens'][item]:
+          jogador['Atributos']['ataque'] *= jogador['Itens'][item]
+        print("-" * 50)
     else:
       print("\n\t-=-Inimigo Vez-=-")
 
