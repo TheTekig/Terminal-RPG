@@ -1,0 +1,22 @@
+{
+     "Guerreiro": {
+          "Slash": 1.5,
+          "Porrada": 1.1,
+          "Aumentar Defesa": 1.2
+     },
+     "Mago": {
+          "Bola de Fogo": 1.5,
+          "Cajadada": 0.9,
+          "Enfraquecimento": 5
+     },
+     "Assasino": {
+          "Corte Profundo": 1.4,
+          "Ataque Escondido": 1.2,
+          "Ataque baixo": 1.7
+     },
+     "Arqueiro": {
+          "Flecha Comum": 1.1,
+          "Flecha com efeito": 1.3,
+          "Flecha Explosiva": 1.5
+     }
+}

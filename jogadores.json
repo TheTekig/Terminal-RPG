@@ -1,0 +1,130 @@
+{
+     "Tekig": {
+          "Nome": "Tekig",
+          "Idade": "21",
+          "Gold": 3,
+          "xp": 10,
+          "lvl": 2,
+          "Classe": "Assasino",
+          "Skills": {
+               "Corte Profundo": 1.4,
+               "Ataque Escondido": 1.2,
+               "Ataque baixo": 1.7
+          },
+          "Atributos": {
+               "vida": -6.5,
+               "ataque": 24.0
+          },
+          "Inimigos": 1,
+          "Itens": [
+               {
+                    "nome": "Pocao de Negacao de Dano"
+               },
+               {
+                    "nome": "Espada",
+                    "Ataque": 1.2
+               },
+               {
+                    "nome": "Espada",
+                    "Ataque": 1.2
+               },
+               {
+                    "nome": "Bomba",
+                    "Ataque": 25
+               },
+               {
+                    "nome": "Pocao de Cura",
+                    "Cura": 20
+               },
+               {
+                    "nome": "Pocao de Forca",
+                    "Ataque": 1.5
+               },
+               {
+                    "nome": "Bomba",
+                    "Ataque": 25
+               },
+               {
+                    "nome": "Pocao de Forca",
+                    "Ataque": 1.5
+               },
+               {
+                    "nome": "Arco",
+                    "Ataque": 1.1
+               },
+               {
+                    "nome": "Bomba",
+                    "Ataque": 25
+               },
+               {
+                    "nome": "Arco",
+                    "Ataque": 1.1
+               },
+               {
+                    "nome": "Pocao de Negacao de Dano"
+               },
+               {
+                    "nome": "Pocao de Negacao de Dano"
+               },
+               {
+                    "nome": "Espada",
+                    "Ataque": 1.2
+               },
+               {
+                    "nome": "Bomba",
+                    "Ataque": 25
+               },
+               {
+                    "nome": "Bomba",
+                    "Ataque": 25
+               },
+               {
+                    "nome": "Arco",
+                    "Ataque": 1.1
+               },
+               {
+                    "nome": "Pocao de Cura",
+                    "Cura": 20
+               },
+               {
+                    "nome": "Pocao de Cura",
+                    "Cura": 20
+               },
+               {
+                    "nome": "Bomba",
+                    "Ataque": 25
+               },
+               {
+                    "nome": "Pocao de Cura",
+                    "Cura": 20
+               },
+               {
+                    "nome": "Bomba",
+                    "Ataque": 25
+               },
+               {
+                    "nome": "Pocao de Cura",
+                    "Cura": 20
+               }
+          ]
+     },
+     "Isolda": {
+          "Nome": "Isolda",
+          "Idade": "21",
+          "Gold": 0,
+          "xp": 0,
+          "lvl": 1,
+          "Classe": "Mago",
+          "Skills": {
+               "Bola de Fogo": 1.5,
+               "Cajadada": 0.9,
+               "Enfraquecimento": 5
+          },
+          "Atributos": {
+               "vida": 10,
+               "ataque": 15
+          },
+          "Inimigos": 0,
+          "Itens": []
+     }
+}

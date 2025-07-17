@@ -1,0 +1,37 @@
+{
+     "1": {
+          "nome": "Zumbi",
+          "vida": 10,
+          "ataque": 5,
+          "xp": 10,
+          "gold": 4
+     },
+     "2": {
+          "nome": "Esqueleto",
+          "vida": 15,
+          "ataque": 10,
+          "xp": 10,
+          "gold": 6
+     },
+     "3": {
+          "nome": "Mago Sombrio",
+          "vida": 20,
+          "ataque": 15,
+          "xp": 10,
+          "gold": 2
+     },
+     "4": {
+          "nome": "Bandido",
+          "vida": 25,
+          "ataque": 20,
+          "xp": 10,
+          "gold": 8
+     },
+     "5": {
+          "nome": "Louco",
+          "vida": 30,
+          "ataque": 25,
+          "xp": 10,
+          "gold": 10
+     }
+}
