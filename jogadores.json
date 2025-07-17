@@ -1,130 +1,29 @@
 {
      "Tekig": {
           "Nome": "Tekig",
-          "Idade": "21",
+          "Idade": "25",
           "Gold": 3,
-          "xp": 10,
-          "lvl": 2,
-          "Classe": "Assasino",
+          "xp": 20,
+          "lvl": 3,
+          "Classe": "Arqueiro",
           "Skills": {
-               "Corte Profundo": 1.4,
-               "Ataque Escondido": 1.2,
-               "Ataque baixo": 1.7
+               "Flecha Comum": 1.1,
+               "Flecha com efeito": 1.3,
+               "Flecha Explosiva": 1.5
           },
           "Atributos": {
-               "vida": -6.5,
-               "ataque": 24.0
+               "vida": -3.4000000000000004,
+               "ataque": 14.399999999999999
           },
-          "Inimigos": 1,
+          "Inimigos": 2,
           "Itens": [
                {
-                    "nome": "Pocao de Negacao de Dano"
-               },
-               {
-                    "nome": "Espada",
-                    "Ataque": 1.2
-               },
-               {
-                    "nome": "Espada",
-                    "Ataque": 1.2
-               },
-               {
-                    "nome": "Bomba",
-                    "Ataque": 25
-               },
-               {
-                    "nome": "Pocao de Cura",
-                    "Cura": 20
-               },
-               {
                     "nome": "Pocao de Forca",
                     "Ataque": 1.5
                },
                {
-                    "nome": "Bomba",
-                    "Ataque": 25
-               },
-               {
-                    "nome": "Pocao de Forca",
-                    "Ataque": 1.5
-               },
-               {
-                    "nome": "Arco",
-                    "Ataque": 1.1
-               },
-               {
-                    "nome": "Bomba",
-                    "Ataque": 25
-               },
-               {
-                    "nome": "Arco",
-                    "Ataque": 1.1
-               },
-               {
                     "nome": "Pocao de Negacao de Dano"
-               },
-               {
-                    "nome": "Pocao de Negacao de Dano"
-               },
-               {
-                    "nome": "Espada",
-                    "Ataque": 1.2
-               },
-               {
-                    "nome": "Bomba",
-                    "Ataque": 25
-               },
-               {
-                    "nome": "Bomba",
-                    "Ataque": 25
-               },
-               {
-                    "nome": "Arco",
-                    "Ataque": 1.1
-               },
-               {
-                    "nome": "Pocao de Cura",
-                    "Cura": 20
-               },
-               {
-                    "nome": "Pocao de Cura",
-                    "Cura": 20
-               },
-               {
-                    "nome": "Bomba",
-                    "Ataque": 25
-               },
-               {
-                    "nome": "Pocao de Cura",
-                    "Cura": 20
-               },
-               {
-                    "nome": "Bomba",
-                    "Ataque": 25
-               },
-               {
-                    "nome": "Pocao de Cura",
-                    "Cura": 20
                }
           ]
-     },
-     "Isolda": {
-          "Nome": "Isolda",
-          "Idade": "21",
-          "Gold": 0,
-          "xp": 0,
-          "lvl": 1,
-          "Classe": "Mago",
-          "Skills": {
-               "Bola de Fogo": 1.5,
-               "Cajadada": 0.9,
-               "Enfraquecimento": 5
-          },
-          "Atributos": {
-               "vida": 10,
-               "ataque": 15
-          },
-          "Inimigos": 0,
-          "Itens": []
      }
 }

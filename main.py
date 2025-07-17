@@ -188,7 +188,7 @@ def Combate(nome,vJogadores,vInimigos):
         print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
       else:
         time.sleep(1)
-        print("\t!INIMIGO DESVIOU!")
+        print("\t!JOGADOR DESVIOU!")
         time.sleep(0.5)
         jogador['Atributos']['vida'] -= 0
         time.sleep(0.5)
@@ -200,12 +200,12 @@ def Combate(nome,vJogadores,vInimigos):
       time.sleep(0.5)
   if jogador['Atributos']['vida'] <= 0:                                 #Morte do Jogador Caso sua vida seja meno igual a 0
     time.sleep(1)
-    print("\n\t!VOCE MORREU!")
+    print("\n\t!VOCE ESTA INCAPACITADO!")
     
   else:
-
-    print("INIMIGO DERROTADO")
-    time.sleep(1)
+    time.sleep(0.5)
+    print("\n","-=" * 10,"INIMIGO DERROTADO","=-" * 10,"\n")
+    time.sleep(2)
 #################Recompensas########################
     jogador['xp'] += inimigo['xp']
     jogador['Inimigos'] += 1
@@ -215,7 +215,7 @@ def Combate(nome,vJogadores,vInimigos):
 
     print(f"Jogador Adquiriu {inimigo['xp']}XP")
     time.sleep(1)
-    print(f"Jogador Adquiriu {goldmonster}Gold")
+    print(f"Jogador Adquiriu {goldmonster} Gold")
     time.sleep(1)
 
     Level_up(vJogadores,nome)
@@ -233,17 +233,25 @@ def Level_up(vJogadores,nome):                                           #Sistem
     jogador['Atributos']['vida'] *= 1.2                                    #Multiplicador de atributos do jogador por nivel subido (obs: Provavelmente vou alterar para que o nivel de xp necessario escale com o nvl subido)
     jogador['Atributos']['ataque'] *= 1.2
     print("-" * 50)
-    print(f"Jogador{jogador['Nome']} subiu para o nivel{jogador['lvl']}")
+    time.sleep(0.5)
+    print(f"Jogador{jogador['Nome']} subiu para o nivel {jogador['lvl']}")
+    time.sleep(0.5)
     print(f"Novos atributos = Vida:{jogador['Atributos']['vida']} / Ataque:{jogador['Atributos']['ataque']}")
+    time.sleep(0.5)
     print("-" * 50)
+
   save("jogadores.json",vJogadores)
 
 
 def Game_Inputs():                                                       #Em geral alguns inputs
 
-  print("-" * 50)
+  time.sleep(0.5)
+  print("=" * 50)
+  time.sleep(0.5)
   print("\tM - MOVE / S - STATUS / I - ITENS")
-  print("-" * 50)
+  time.sleep(0.5)
+  print("=" * 50)
+  time.sleep(0.5)
   op = input("--->")
   while op.upper() not in ["M","S","I","0"]:
     op = input("Invalido\n--->")
@@ -276,17 +284,26 @@ def controlador(vJogadores,nome,arm,vItens,vInimigos):                   #Contro
         acao = Game_Inputs()
 
       elif situacao == "Nada Aconteceu":
-        print("NADA OCORREU!")
+        print("NADA OCORREU!\n")
         acao = Game_Inputs()
 
       elif situacao == "Caiu em uma Armadilha":
-        print("Voce caiu em uma armadilha mas escapou!")
+        print("Voce sente que esta em uma enrascada...")
+        time.sleep(2)
+        print("Voce caiu em uma armadilha mas escapou!\n")
+        time.sleep(0.5)
         arm += 1                            
 
-        if arm == random.randint(3,10):                                     #Impede que toda vez que o jogador caia em uma armadilha ele se machuque
+        if arm == random.randint(3,10):
+          print("Voce sente que esta em uma enrascada...")
+          time.sleep(2)                                     #Impede que toda vez que o jogador caia em uma armadilha ele se machuque
           print("Voce caiu em uma armadilha e se machucou!")
+          time.sleep(0.5)
           vJogadores[nome]['Atributos']['vida'] -= random.randint(1,10)     #Aleatoridade do dano que o jogador ira tomar caso caia na armadilha
+          print(f"Vida: {vJogadores[nome]['Atributos']['vida']}\n")
+          time.sleep(0.5)
           arm = 0
+
         acao = Game_Inputs()
 
       else:
@@ -454,11 +471,17 @@ def listar_jogadores(vJogadores):                                         #Lista
     print("-" * 20)
 
 def opcoesdeclasse():
+  time.sleep(0.5)
   print("\n\tClasse do Jogador: ")
+  time.sleep(0.5)
   print("\t1. Guerreiro")
+  time.sleep(0.5)
   print("\t2. Mago")
+  time.sleep(0.5)
   print("\t3. Assassino")
+  time.sleep(0.5)
   print("\t4. Arqueiro")
+  time.sleep(0.5)
 
 def cad_player(vJogadores,vClasse,vSkills):                               #Cadastro Player
   #region Nome/Idade
@@ -478,18 +501,22 @@ def cad_player(vJogadores,vClasse,vSkills):                               #Cadas
       opcoesdeclasse()
       op = op_()
 
-      if op == 1:
+      if op == "1":
           classe = "Guerreiro"
           descricao = "-Possui Mais Vida\n-Ataque Equilibrado"
-      elif op == 2:
+      elif op == "2":
           classe = "Mago"
           descricao = "-Vida Mediana\n-Aprende magias\n-Dano um pouco maior"
-      elif op == 3:
+      elif op == "3":
           classe = "Assassino"
           descricao = "-Vida Baixa\n-Ataque Muito Alto"
-      elif op == 4:
+      elif op == "4":
           classe = "Arqueiro"
           descricao = "-Vida e Ataque Equilibrados"
+      else:
+        print("\n\t-=-Valor Invalido-=-\n")
+        continue #Volta pro inicio do While
+        
 
       print(f"\n\t{classe}\n{descricao}")
       confirmacao = input("Deseja Escolher essa classe? (S/N): ").upper()
@@ -527,18 +554,26 @@ def cad_player(vJogadores,vClasse,vSkills):                               #Cadas
 #region MENU/INPUTs
 
 def menu():
+  time.sleep(0.5)
   print("\n","-=" * 7 , "Menu", "=-" * 10,"\n")
+  time.sleep(0.5)
   print("\t1. Jogar")
+  time.sleep(0.5)
   print("\t2. Cadastrar Jogador")
+  time.sleep(0.5)
   print("\t3. Listar Jogadores")
+  time.sleep(0.5)
   print("\t4. Procurar Jogador")
+  time.sleep(0.5)
   print("\t5. Remover Jogador")
+  time.sleep(0.5)
   print("\t6. Encerrar o Programa")
+  time.sleep(0.5)
 
 def op_():
-  op = int(input("Digito: "))
-  while op not in [1,2,3,4,5,6]:
-    op = int(input("Valor Inválido\nDigito: "))
+  op = input("Digito: ")
+  while op not in ["1","2","3","4","5","6"]:
+    op = input("Valor Inválido\nDigito: ")
   return op
 
 #endregion
@@ -560,9 +595,9 @@ def main():
   print("\n\t -=-SISTEMA DE RPG-=-")   
   menu()
   op = op_()
-  while op != 6:
+  while op != "6":
 
-    if op == 1:
+    if op == "1":
 ###############################################################################
       print("\n","-=" * 7 , "Jogar", "=-" * 10,"\n")                                            
       nome = input("Nome do Jogador: ")
@@ -584,23 +619,24 @@ def main():
       menu()
       op = op_()
 ###############################################################################
-    if op == 2:
+    if op == "2":
+      print("\n","-=" * 7 , "Cadastro", "=-" * 10,"\n")
       cad_player(vJogadores,vClasse,vSkills)
       menu()
       op = op_()
 
-    if op == 3:
+    if op == "3":
       listar_jogadores(vJogadores)
       menu()
       op = op_()
 
-    if op == 4:
+    if op == "4":
       print("\n","-=" * 7 , "Ficha", "=-" * 10,"\n")
       porcurar_jogador(vJogadores)
       menu()
       op = op_()
     
-    if op == 5:
+    if op == "5":
       print("\n","-=" * 7 , "Remover", "=-" * 10,"\n")
       remover_jogador(vJogadores)
       menu()

@@ -5,28 +5,51 @@
 ✅ Novas Funcionalidades / Melhorias
 
     -Sistema de Uso de Itens dentro do Combate
+
     -O jogador agora pode optar por usar itens em vez de atacar.
+
     -Itens de cura e ataque aplicam efeitos diretamente durante o combate.
+
     -Implementada opção de cancelar o uso do item.
+
     -Consumo e Gerenciamento de Itens
+
     -Itens são removidos do inventário após uso.
+
     -Validação se o item existe antes do uso.
+
     -Feedback visual de item consumido ou não encontrado.
+
     -Sistema de Defesa Parcial (Estruturado nos Itens)
+
     -Adição do item "Escudo" com atributo de defesa (ainda não aplicado no cálculo de combate, mas preparado).
+
     -Exploração Refinada
+
     -Armadilhas agora acumulam um contador (arm) e só causam dano após um número aleatório de ativações.
+
     -Dano das armadilhas é aleatório entre 1 e 10 de vida.
+
     -Incrementos Narrativos e Ambientação
+
     -Mensagens narrativas aprimoradas: "Você sente uma presença...", "Você vê algo brilhando...".
+
     -Adicionado delay (time.sleep) para simular suspense e fluidez no jogo.
+
     -Aprimoramento na Exibição de Status
+
     -Ficha do jogador agora exibe inimigos derrotados.
+
     -Melhoria na Modularização
+
     -Adição de função Game_Inputs centralizando os inputs de comando (Mover, Status, Itens).
+
     -Validação reforçada para evitar opções inválidas em diversas escolhas.
+
     -Otimização do Sistema de Level Up
+
     -XP para o próximo nível definido por multiplicação do nível atual por 10.
+    
     -Subida de nível aumenta vida e ataque em 20%.
 
 ✅ Ajustes Técnicos e de Organização
@@ -41,7 +64,7 @@
     -Sistema de ambiente ainda pendente (vAmbiente é carregado mas não usado).
     -Sistema de missões, história ou objetivos ainda não introduzido.
 
-
+-------------------------------------------------------------------------------------------------------------------
 
 **🗂️ CHANGELOG - Versão 2.0**
 
@@ -123,11 +146,11 @@ Menu Principal para navegar entre:
             Feature	            Status
       Sistema de Combate	      ✅ Completo
       Itens e Inventário	      ✅ Completo
-      Sistema de Level Up      	✅ Completo
+      Sistema de Level Up      	  ✅ Completo
       Ouro / Gold	              ✅ Completo
-      Skills por Classe	        ✅ Completo
-      Persistência com JSON	    ✅ Completo
-      Sistema de Exploração	    ✅ Completo
+      Skills por Classe	          ✅ Completo
+      Persistência com JSON	      ✅ Completo
+      Sistema de Exploração	      ✅ Completo
       Ambientes Variados	      🕒 Planejado
       NPCs / Missões	          ❌ Não implementado
 
@@ -212,8 +235,8 @@ Uso de arquivos JSON para:
     Escolha de Classe	          ✅ Completo
     Persistência JSON	          ✅ Completo
     Listar Jogadores	          ✅ Completo
-    Procurar Jogadores	        ✅ Completo
-    Sistema de Combate	        ❌ Não implementado
+    Procurar Jogadores	          ✅ Completo
+    Sistema de Combate	          ❌ Não implementado
     Sistema de Itens	          ❌ Não implementado
     Sistema de XP e Level Up	  ❌ Não implementado
     Skills por Classe	          ❌ Não implementado
