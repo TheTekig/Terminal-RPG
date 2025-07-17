@@ -21,33 +21,47 @@ def load(nomeArquivo):
 
 
 def Combate(nome,vJogadores,vInimigos):
-  print("\n\t-=-Combate Iniciado-=-")
+  
   jogador = vJogadores[nome]                                              #Declaracao de jogador e inimigo para encurtar chave para chamada de atributos
   inimigo = gerador_inimigos(vInimigos)
+  print("\n\t-=-Combate Iniciado-=-")
+  time.sleep(1)
   print("\n\tSeu Inimigo é: ", inimigo['nome'])
 
   while jogador['Atributos']['vida'] > 0 and inimigo['vida'] > 0:
                                                                           #Status do Inimigo e do Jogador
     print(f"\n\t-=-{jogador['Nome']}-=-")
+    time.sleep(0.5)
     print("\n\tVida: ",jogador['Atributos']['vida'])
+    time.sleep(0.5)
     print("\tAtaque: ",jogador['Atributos']['ataque'])
+    time.sleep(0.5)
     print(f"\n\t-=-Inimigo {inimigo['nome']}-=-")
+    time.sleep(0.5)
     print("\n\tVida: ",inimigo['vida'])
+    time.sleep(0.5)
     print("\tAtaque: ",inimigo['ataque'])
 
-    time.sleep(0.5)
+    print("\n-=-Analisando Iniciativa-=-")
+    time.sleep(3)
 
     Inicio = random.randint(0,1)                                           #Numero Random para decidir quem sera o atacante
 
     time.sleep(0.5)
 
     if Inicio == 0:
+      print("\n-=-Jogador Saiu Na Frente-=-")
+      time.sleep(0.5)
       print("\n\t-=-Sua Vez-=-")
+      time.sleep(0.5)
       print("-" * 50)
+      time.sleep(0.5)
       print(f"//O Ataque do jogador vai escalionar com a Skill")
-      print("-" * 50)
+      print("=" * 50)
+      time.sleep(0.5)
       print("\tA - ATTACK / I - ITENS")
-      print("-" * 50)
+      time.sleep(0.5)
+      print("=" * 50)
       
       op = input("--->")
       while op.upper() not in ["I","A"]:
@@ -89,12 +103,18 @@ def Combate(nome,vJogadores,vInimigos):
           
           #endregion
       else:
-        print("-" * 50)
+        print("=" * 50)
+        time.sleep(0.5)
         print(f"{jogador['Itens']}")
+        time.sleep(0.5)
         print("Escolha seu Item (ou digite 0 para cancelar):")
-
+        time.sleep(0.5)
+        print("=" * 50)
+        time.sleep(0.5)
         item_nome = input("---> ")
-
+        time.sleep(0.5)
+        print("-" * 50)
+        time.sleep(0.5)
         if item_nome == "0":
             acao = Game_Inputs()
         else:
@@ -120,46 +140,72 @@ def Combate(nome,vJogadores,vInimigos):
             else:
                 print("Item não encontrado.")
     else:
+      time.sleep(0.5)
+      print("\n-=-Inimigo saiu na Frente-=-")
+      time.sleep(0.5)
       print("\n\t-=-Inimigo Vez-=-")
 
       print("-" * 50)
 
       #region Aleatoridade/DanoInimigo
+      print("Inimigo esta pensando no ataque...")
+      time.sleep(random.randint(1,5))
       ataque = inimigo['ataque']
       missChance = random.randint(0,100)
 
 
       if missChance < 5:
         jogador['Atributos']['vida'] -= ataque * 1.5
+        time.sleep(1)
+        print("\t!DANO CRITICO!")
+        time.sleep(0.5)
         print("Dano :" , ataque * 1.5)
-        print(f"\t!DANO CRITICO!\nVida Atual do Jogador - {jogador['vida']}")
+        time.sleep(0.5)
+        print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
       elif missChance < 30:
         jogador['Atributos']['vida'] -= ataque
+        time.sleep(1)
+        print("\t!DANO EM CHEIO!")
+        time.sleep(0.5)        
         print("Dano :" , ataque)
-        print(f"\t!DANO EM CHEIO!\nVida Atual do Jogador - {jogador['Atributos']['vida']}")
+        time.sleep(0.5)
+        print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
       elif missChance < 50:
         jogador['Atributos']['vida'] -= ataque / 2
+        time.sleep(1)
+        print("\t!DANO RASPAO!")
+        time.sleep(0.5)        
         print("Dano :" , ataque / 2)
-        print(f"\t!DANO RASPAO!\nVida Atual do Jogador - {jogador['Atributos']['vida']}")
+        time.sleep(0.5)
+        print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
       elif missChance < 70:
+        time.sleep(1)
+        print("\t!DANO MEDIOCRE!")
+        time.sleep(0.5)
         jogador['Atributos']['vida'] -= ataque / 4
         print("Dano :", ataque / 4)
-        print(f"\t!DANO MEDIOCRE!\nVida Atual do Jogador - {jogador['Atributos']['vida']}")
+        time.sleep(0.5)
+        print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
       else:
+        time.sleep(1)
+        print("\t!INIMIGO DESVIOU!")
+        time.sleep(0.5)
         jogador['Atributos']['vida'] -= 0
-        print(f"\t!JOGADOR DESVIOU!\nVida Atual do Jogador - {jogador['Atributos']['vida']}")
+        time.sleep(0.5)
+        print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
 
       #endregion
 
       print("-" * 50)
-    
+      time.sleep(0.5)
   if jogador['Atributos']['vida'] <= 0:                                 #Morte do Jogador Caso sua vida seja meno igual a 0
+    time.sleep(1)
     print("\n\t!VOCE MORREU!")
     
   else:
 
     print("INIMIGO DERROTADO")
-
+    time.sleep(1)
 #################Recompensas########################
     jogador['xp'] += inimigo['xp']
     jogador['Inimigos'] += 1
@@ -167,10 +213,10 @@ def Combate(nome,vJogadores,vInimigos):
     jogador['Gold'] += goldmonster
 ###################################################
 
-    print(f"Jogador Adquiriu {inimigo['xp']}")
-    print(f"Jogador Adquiriu {goldmonster}")
-    print(f"XP Atual: {jogador['xp']}")
-    print(f"Gold Atual: {jogador['Gold']}")
+    print(f"Jogador Adquiriu {inimigo['xp']}XP")
+    time.sleep(1)
+    print(f"Jogador Adquiriu {goldmonster}Gold")
+    time.sleep(1)
 
     Level_up(vJogadores,nome)
 
@@ -219,10 +265,13 @@ def controlador(vJogadores,nome,arm,vItens,vInimigos):                   #Contro
   while acao != "0":
 
     if acao == "M":
+      print("\nExplorando...")
+      time.sleep(random.randint(1,4))
       situacao = exploracao()
 
       if situacao == "Acho Inimigo!":                                       #Inicia a funcao de combate do jogador
-        print("INIMIGO AVISTADO!")
+        print("Voce sente uma presença se aproximando...")
+        time.sleep(random.randint(1,4))
         Combate(nome,vJogadores,vInimigos)
         acao = Game_Inputs()
 
@@ -243,7 +292,7 @@ def controlador(vJogadores,nome,arm,vItens,vInimigos):                   #Contro
       else:
         item = gerador_itens(vItens)                                        #Adicao de itens a um "Inventario" do jogador
         vJogadores[nome]['Itens'].append(item)
-        print(f"Voce achou um - {item}")
+        print(f"Voce achou um - {item}\n")
         save("jogadores.json",vJogadores)
         acao = Game_Inputs()
         
@@ -289,11 +338,15 @@ def controlador(vJogadores,nome,arm,vItens,vInimigos):                   #Contro
   print("Saindo...")
 
 def gerador_inimigos(vInimigos):                                          #Escolhe um Inimigo do Dicionario de Inimigos
-  num = random.randint(1,len(vInimigos))        
+  num = random.randint(1,len(vInimigos))
+  print("!INIMIGO AVISTADO!")
+  time.sleep(random.randint(1,3))        
   return vInimigos[str(num)].copy()                 #faz uma copia do inimigo para nao alterar a variavel principal do inimigo
 
 def gerador_itens(vItens):                                                #Escolhe um Item da lista de Itens do jogo
   num = random.randint(1,len(vItens))
+  print("\tVoce ve algo brilhando a distancia...")
+  time.sleep(4)
   return vItens[str(num)]
 
 def Listas_Dicionarios():                                                 #Listas de Dicionarios com os principais elementos 
@@ -342,16 +395,27 @@ def Listas_Dicionarios():                                                 #Lista
 #region CADASTRO/FUNCOES DE MENU
 
 def ficha_jogador(vJogadores,nome):                                       #Ficha Simples com todos os Status
-
+  time.sleep(0.5)
   print("-" * 40)
+  time.sleep(0.5)
   print("\tNome: "  ,vJogadores[nome]["Nome"])
+  time.sleep(0.5)
   print("\tIdade: " ,vJogadores[nome]["Idade"])
+  time.sleep(0.5)
   print("\tGold: "  ,vJogadores[nome]["Gold"])
+  time.sleep(0.5)
   print("\txp: "    ,vJogadores[nome]["xp"])
+  time.sleep(0.5)
   print("\tLevel: " ,vJogadores[nome]["lvl"])
+  time.sleep(0.5)
   print("\tClasse: ",vJogadores[nome]["Classe"])
+  time.sleep(0.5)
   print("\tVida: "  ,vJogadores[nome]["Atributos"]["vida"])
+  time.sleep(0.5)
   print("\tAtaque: ",vJogadores[nome]["Atributos"]["ataque"])
+  time.sleep(0.5)
+  print("\tInimigos: ",vJogadores[nome]["Inimigos"])
+  time.sleep(0.5)
   print("-" * 40)
 
 def porcurar_jogador(vJogadores):                                         #Funcao de Procurar Jogador (obs: Posso implementar isso melhor para reutilizar em outros locais)
@@ -360,8 +424,22 @@ def porcurar_jogador(vJogadores):                                         #Funca
     nome = input("Valor Inválido\nNome do Jogador: ")
   if nome in vJogadores:
     ficha_jogador(vJogadores,nome)
+    return nome
   else:
     print("\n\t-=- Jogador Não Encontrado -=-\n")
+  
+
+def remover_jogador(vJogadores):
+  nome = porcurar_jogador(vJogadores)
+  op = input("Deseja realmente remover esse jogador? (S/N): ").upper()
+  while op not in ["S", "N"]:
+    op = input("Valor Inválido\nDeseja realmente remover esse jogador? (S/N): ").upper()
+  if op == "S":
+    del vJogadores[nome]
+    print("Jogador Removido.")
+  else:
+    print("Jogador não removido.")
+  save("jogadores.json",vJogadores)
 
 def listar_jogadores(vJogadores):                                         #Listagem com nome/idade/clasee de cada jogador
   print("\n\t-=-Lista de Jogadores-=-\n ")
@@ -370,6 +448,9 @@ def listar_jogadores(vJogadores):                                         #Lista
     print(f"Nome:  {dado['Nome']}")
     print(f"Idade: {dado['Idade']}")
     print(f"Classe: {dado['Classe']}")
+    print(f"Level: {dado['lvl']}")
+    print(f"XP: {dado['xp']}")
+    print(f"Kills: {dado['Inimigos']}")
     print("-" * 20)
 
 def opcoesdeclasse():
@@ -383,7 +464,7 @@ def cad_player(vJogadores,vClasse,vSkills):                               #Cadas
   #region Nome/Idade
 
   nome = input("Nome do Jogador: ")
-  while nome.isalpha() != True or len(nome) == 0:
+  while nome.replace(" ","").isalpha() != True or len(nome) == 0:
     nome = input("Valor Inválido\nNome do Jogador:")
   
   idade = input("Idade do Jogador: ")
@@ -446,16 +527,17 @@ def cad_player(vJogadores,vClasse,vSkills):                               #Cadas
 #region MENU/INPUTs
 
 def menu():
-  print("\n\t-=- Menu -=-")
+  print("\n","-=" * 7 , "Menu", "=-" * 10,"\n")
   print("\t1. Jogar")
   print("\t2. Cadastrar Jogador")
   print("\t3. Listar Jogadores")
   print("\t4. Procurar Jogador")
-  print("\t5. Encerrar o Programa")
+  print("\t5. Remover Jogador")
+  print("\t6. Encerrar o Programa")
 
 def op_():
   op = int(input("Digito: "))
-  while op not in [1,2,3,4,5]:
+  while op not in [1,2,3,4,5,6]:
     op = int(input("Valor Inválido\nDigito: "))
   return op
 
@@ -475,21 +557,29 @@ def main():
 
  #endregion
 
-  print("\n\t-=-SISTEMA DE RPG-=-")   
+  print("\n\t -=-SISTEMA DE RPG-=-")   
   menu()
   op = op_()
-  while op != 5:
+  while op != 6:
 
     if op == 1:
 ###############################################################################
-      print("\n\t-=- Jogar -=-\n")                                            
+      print("\n","-=" * 7 , "Jogar", "=-" * 10,"\n")                                            
       nome = input("Nome do Jogador: ")
       while nome.isalpha() != True or len(nome) < 0 or nome not in vJogadores:
         if nome not in vJogadores:
           print("\n\t-=- Jogador Não Encontrado -=-\n")
           nome = input("Nome do Jogador: ")
+
         else:
           nome = input("Valor Inválido\nNome do Jogador: ")
+      time.sleep(0.5)    
+      print("=-" * 25)
+      time.sleep(0.5)
+      print("\t!BEM VINDO A ECHRONIA!")
+      time.sleep(0.5)
+      print("=-" * 25)
+      time.sleep(0.5)
       controlador(vJogadores,nome,arm,vItens,vInimigos)
       menu()
       op = op_()
@@ -505,8 +595,14 @@ def main():
       op = op_()
 
     if op == 4:
-      print("\n\t-=-Ficha do Jogador-=-")
+      print("\n","-=" * 7 , "Ficha", "=-" * 10,"\n")
       porcurar_jogador(vJogadores)
+      menu()
+      op = op_()
+    
+    if op == 5:
+      print("\n","-=" * 7 , "Remover", "=-" * 10,"\n")
+      remover_jogador(vJogadores)
       menu()
       op = op_()
 
