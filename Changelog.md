@@ -1,3 +1,113 @@
+🗂️ CHANGELOG - Versão 4.0
+📆 2025-07-18
+
+    Resumo: Grande expansão no ecossistema do jogo: novas interações com NPCs, buffs, comerciantes aprimorados, defesa com Totem, sistema avançado de exploração e itens únicos.
+
+✅ Novas Funcionalidades
+
+    -NPC Jhonny o UPGRADE
+    
+    -NPC que concede buffs aleatórios de ataque ou vida ao jogador, limitado a 1 buff por encontro.
+    
+    -Totem de Negação de Dano
+    
+    -Item especial que impede completamente o próximo ataque recebido.
+    
+    -Mensagem narrativa personalizada quando o efeito é ativado.
+    
+    -Sistema de Comprar Itens com Gold
+    
+    -Comerciante oferece itens diversos por valores variados de gold.
+    
+    -Validação de saldo e atualização automática do inventário.
+    
+    -Novos Itens Adicionados
+    
+    -Pocao de Cura, Pocao de Forca, Totem, Bomba, Arco, Espada, Escudo.
+    
+    -Cada item possui tipo (Cura, Ataque, Defesa) para tratamento específico.
+    
+    -Sistema de Encontrar Itens na Exploração
+    
+    -Durante a exploração, existe a chance de encontrar um item aleatório.
+    
+    -Item encontrado é automaticamente adicionado ao inventário com mensagem narrativa.
+    
+    -Consumir Itens Fora de Combate
+    
+    -Jogador pode acessar o inventário e consumir itens de cura ou buffs direto do menu de exploração.
+    
+    -Sistema de Armadilhas Avançado
+    
+    -Armadilhas agora acumulam ativações antes de causarem dano real.
+    
+    -Dano permanece aleatório entre 1 e 10.
+
+🟠 Aprimoramentos e Melhorias
+
+    -Combate Enriquecido
+    
+    -Jogador escolhe entre atacar ou usar itens.
+    
+    -Itens como Totem, Pocao de Forca e Cura aplicam efeitos estratégicos no turno.
+    
+    -Feedback Narrativo
+    
+    -Mensagens detalhadas informando buffs, usos de itens, bloqueio de ataques, etc.
+    
+    -Uso de time.sleep() para criar ritmo narrativo.
+    
+    -Organização de Funções
+
+Criação de funções específicas para:
+
+    -Gerar inimigos.
+    
+    -Gerar NPCs.
+    
+    -Gerar comerciantes.
+    
+    -Gerar ambientes.
+    
+    -Encontrar itens aleatórios.
+    
+    -Refino do Level Up
+    
+    -XP necessário: nível atual * 10.
+    
+    -Vida e ataque aumentam em 20% ao subir de nível.
+
+🟢 Correções e Ajustes Técnicos
+
+    -Controle aprimorado de inputs inválidos.
+    
+    -Salvamento dos dados do jogador após cada ação importante.
+    
+    -Otimização da busca e remoção de itens no inventário.
+    
+    -Uso adequado de .copy() para evitar mutação não-intencional dos dados carregados.
+
+❌ Pontos Preparados mas Ainda Não Implementados
+
+    -O atributo de defesa do Escudo ainda não é aplicado no cálculo do dano recebido.
+    
+    -Sistema de Ambientes com efeitos reais sobre o jogo ainda não integrado.
+    
+    -Missões, história e bosses ainda não presentes.
+
+📌 Resumo Técnico
+    
+                Sistema	                    Status
+    Uso de Itens no Combate	            ✅ Completo
+    NPCs com buffs	                    ✅ Completo
+    Totem de Defesa Total	            ✅ Completo
+    Comerciante com sistema de compra	✅ Completo
+    Encontrar Itens em Exploração	    ✅ Completo
+    Armadilhas com contador	            ✅ Completo
+    Defesa aplicada no cálculo	        ❌ Pendente
+    Ambientes com efeitos	            ❌ Pendente
+    Sistema de História/Missões	        ❌ Pendente
+
 🗂️ CHANGELOG - Versão 3.0
 
     -2025-07-17	3.0	Expansão do sistema de RPG: melhorias em combate, itens, inventário, exploração e progressão do jogador.
