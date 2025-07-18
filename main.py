@@ -20,7 +20,7 @@ def load(nomeArquivo):
 #endregion
 
 
-def Combate(nome,vJogadores,vInimigos):
+def Combate(nome,vJogadores,vInimigos,vItens,vSkills):
   
   jogador = vJogadores[nome]                                              #Declaracao de jogador e inimigo para encurtar chave para chamada de atributos
   inimigo = gerador_inimigos(vInimigos)
@@ -35,6 +35,8 @@ def Combate(nome,vJogadores,vInimigos):
     print("\n\tVida: ",jogador['Atributos']['vida'])
     time.sleep(0.5)
     print("\tAtaque: ",jogador['Atributos']['ataque'])
+    time.sleep(0.5)
+    print("\tDefesa: ",jogador['Atributos']['defesa'])
     time.sleep(0.5)
     print(f"\n\t-=-Inimigo {inimigo['nome']}-=-")
     time.sleep(0.5)
@@ -76,30 +78,43 @@ def Combate(nome,vJogadores,vInimigos):
           op = input("Skills Inesistentes\nSkill: ")
 
         #region Aleatoridade/DanoJogador
-  
-        ataque = jogador['Atributos']['ataque'] * jogador['Skills'][op]         #Escalabilidade do ataque
-        missChance = random.randint(0,100)                                      #Gera o numero que sera usado de parametro para definir acertividade do ataque
-        time.sleep(0.5)
-        if missChance < 5:
-          inimigo['vida'] -= ataque * 1.5
-          print("Dano :" , ataque * 1.5)
-          print(f"\t!DANO CRITICO!\nVida Atual do Inimigo - {inimigo['vida']}")
-        elif missChance < 30:
-          inimigo['vida'] -= ataque
-          print("Dano :" , ataque)
-          print(f"\t!DANO EM CHEIO!\nVida Atual do Inimigo - {inimigo['vida']}")
-        elif missChance < 50:
-          inimigo['vida'] -= ataque / 2
-          print("Dano :" , ataque / 2)
-          print(f"\t!DANO RASPAO!\nVida Atual do Inimigo - {inimigo['vida']}")
-        elif missChance < 70:
-          inimigo['vida'] -= ataque / 4
-          print("Dano :", ataque / 4)
-          print(f"\t!DANO MEDIOCRE!\nVida Atual do Inimigo - {inimigo['vida']}")
+        print("Jogador esta preparando o ataque...")
+        time.sleep(random.randint(1,3))
+        print(f"Jogador utilizou : {op}")
+
+        if op == "Aumentar Defesa":
+
+          jogador['Atributos']['defesa'] *= jogador['Skills'][op]
+          print(f"\t!DEFESA AUMENTADA!\nDefesa Atual do Jogador - {jogador['Atributos']['defesa']}")
+          time.sleep(0.5)
+          print("-" * 50)
         else:
-          inimigo['vida'] -= 0
-          print(f"\t!INIMIGO DESVIOU!\nVida Atual do Inimigo - {inimigo['vida']}")
-          
+
+          ataque = jogador['Atributos']['ataque'] * jogador['Skills'][op]
+
+          #Escalabilidade do ataque
+          missChance = random.randint(0,100)                                      #Gera o numero que sera usado de parametro para definir acertividade do ataque
+          time.sleep(0.5)
+          if missChance < 5:
+            inimigo['vida'] -= ataque * 1.5
+            print("Dano :" , ataque * 1.5)
+            print(f"\t!DANO CRITICO!\nVida Atual do Inimigo - {inimigo['vida']}")
+          elif missChance < 30:
+            inimigo['vida'] -= ataque
+            print("Dano :" , ataque)
+            print(f"\t!DANO EM CHEIO!\nVida Atual do Inimigo - {inimigo['vida']}")
+          elif missChance < 50:
+            inimigo['vida'] -= ataque / 2
+            print("Dano :" , ataque / 2)
+            print(f"\t!DANO RASPAO!\nVida Atual do Inimigo - {inimigo['vida']}")
+          elif missChance < 70:
+            inimigo['vida'] -= ataque / 4
+            print("Dano :", ataque / 4)
+            print(f"\t!DANO MEDIOCRE!\nVida Atual do Inimigo - {inimigo['vida']}")
+          else:
+            inimigo['vida'] -= 0
+            print(f"\t!INIMIGO DESVIOU!\nVida Atual do Inimigo - {inimigo['vida']}")
+            
           
           #endregion
       else:
@@ -116,7 +131,7 @@ def Combate(nome,vJogadores,vInimigos):
         print("-" * 50)
         time.sleep(0.5)
         if item_nome == "0":
-            acao = Game_Inputs()
+            print("Jogador não escolhe nenhum item e o jogo avança")
         else:
             item_encontrado = None
             for i in jogador['Itens']:
@@ -140,64 +155,142 @@ def Combate(nome,vJogadores,vInimigos):
             else:
                 print("Item não encontrado.")
     else:
-      time.sleep(0.5)
-      print("\n-=-Inimigo saiu na Frente-=-")
-      time.sleep(0.5)
-      print("\n\t-=-Inimigo Vez-=-")
 
-      print("-" * 50)
+      for i in jogador['Itens']:
+        
+        if i['nome'] == "Totem de Negacao de Dano":
+          time.sleep(0.5)
+          print("\n-=-Inimigo saiu na Frente-=-")
+          time.sleep(random.randint(1,3))
+          print("Um Totem Salta de seu bolso!")
+          time.sleep(0.5)
+          print("\n\t-=-TOTEM DEFENDIDO-=-")
+          time.sleep(0.5)
+          print("-" * 50)
+          time.sleep(0.5)
+          jogador['Itens'].remove(i)
+          print('-=- Item - Totem de Negacao de Dano foi Utilizado -=-')
+          time.sleep(0.5)
+          return
 
-      #region Aleatoridade/DanoInimigo
-      print("Inimigo esta pensando no ataque...")
-      time.sleep(random.randint(1,5))
-      ataque = inimigo['ataque']
-      missChance = random.randint(0,100)
+        else:
+          time.sleep(0.5)
+          print("\n-=-Inimigo saiu na Frente-=-")
+          time.sleep(0.5)
+          print("\n\t-=-Inimigo Vez-=-")
+
+          print("-" * 50)
+
+          #region Aleatoridade/DanoInimigo
+          print("Inimigo esta pensando no ataque...")
+          time.sleep(random.randint(1,5))
+          ataque = inimigo['ataque']
+          missChance = random.randint(0,100)
 
 
-      if missChance < 5:
-        jogador['Atributos']['vida'] -= ataque * 1.5
-        time.sleep(1)
-        print("\t!DANO CRITICO!")
-        time.sleep(0.5)
-        print("Dano :" , ataque * 1.5)
-        time.sleep(0.5)
-        print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
-      elif missChance < 30:
-        jogador['Atributos']['vida'] -= ataque
-        time.sleep(1)
-        print("\t!DANO EM CHEIO!")
-        time.sleep(0.5)        
-        print("Dano :" , ataque)
-        time.sleep(0.5)
-        print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
-      elif missChance < 50:
-        jogador['Atributos']['vida'] -= ataque / 2
-        time.sleep(1)
-        print("\t!DANO RASPAO!")
-        time.sleep(0.5)        
-        print("Dano :" , ataque / 2)
-        time.sleep(0.5)
-        print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
-      elif missChance < 70:
-        time.sleep(1)
-        print("\t!DANO MEDIOCRE!")
-        time.sleep(0.5)
-        jogador['Atributos']['vida'] -= ataque / 4
-        print("Dano :", ataque / 4)
-        time.sleep(0.5)
-        print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
-      else:
-        time.sleep(1)
-        print("\t!JOGADOR DESVIOU!")
-        time.sleep(0.5)
-        jogador['Atributos']['vida'] -= 0
-        time.sleep(0.5)
-        print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
+          if missChance < 5:
 
-      #endregion
+            print("\t!DANO CRITICO!")
+            time.sleep(0.5)
+            print("Dano :" , ataque * 1.5)
+            time.sleep(0.5)
 
-      print("-" * 50)
-      time.sleep(0.5)
+            if jogador['Atributos']['defesa'] <= 0:
+
+              jogador['Atributos']['vida'] -= ataque * 1.5
+              time.sleep(0.5)
+              print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
+
+            else:
+              jogador['Atributos']['defesa'] -= ataque * 1.5
+
+              if jogador['Atributos']['defesa'] <= 0:
+                jogador['Atributos']['defesa'] = 0
+                print("\n\t!Defesa Destruida!")
+
+              else:
+                print("\n\tDefesa Aguentou Ataque!")
+                time.sleep(0.5)
+                print(f"Defesa Atual do Jogador - {jogador['Atributos']['defesa']}")
+
+          elif missChance < 30:
+
+            print("\t!DANO CHEIO!")
+            time.sleep(0.5)
+            print("Dano :" , ataque )
+            time.sleep(0.5)
+            if jogador['Atributos']['defesa'] <= 0:
+
+              jogador['Atributos']['vida'] -= ataque 
+              time.sleep(0.5)
+              print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
+            else:
+              jogador['Atributos']['defesa'] -= ataque 
+              if jogador['Atributos']['defesa'] <= 0:
+                jogador['Atributos']['defesa'] = 0
+                print("\n\t!Defesa Destruida!")
+
+              else:
+                print("\n\tDefesa Aguentou Ataque!")
+                time.sleep(0.5)
+                print(f"Defesa Atual do Jogador - {jogador['Atributos']['defesa']}")
+
+          elif missChance < 50:
+
+            print("\t!DANO MEDIOCRE!")
+            time.sleep(0.5)
+            print("Dano :" , ataque / 2)
+            time.sleep(0.5)
+            if jogador['Atributos']['defesa'] <= 0:
+
+              jogador['Atributos']['vida'] -= ataque / 2
+              time.sleep(0.5)
+              print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
+            else:
+              jogador['Atributos']['defesa'] -= ataque / 2
+              if jogador['Atributos']['defesa'] <= 0:
+                jogador['Atributos']['defesa'] = 0
+                print("\n\t!Defesa Destruida!")
+
+              else:
+                print("\n\tDefesa Aguentou Ataque!")
+                time.sleep(0.5)
+                print(f"Defesa Atual do Jogador - {jogador['Atributos']['defesa']}")
+
+          elif missChance < 70:
+
+            print("\t!DANO RASPAO!")
+            time.sleep(0.5)
+            print("Dano :" , ataque / 4)
+            time.sleep(0.5)
+            if jogador['Atributos']['defesa'] <= 0:
+
+              jogador['Atributos']['vida'] -= ataque / 4
+              time.sleep(0.5)
+              print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
+            else:
+              jogador['Atributos']['defesa'] -= ataque / 4
+              if jogador['Atributos']['defesa'] <= 0:
+                jogador['Atributos']['defesa'] = 0
+                print("\n\t!Defesa Destruida!")
+
+              else:
+                print("\n\tDefesa Aguentou Ataque!")
+                time.sleep(0.5)
+                print(f"Defesa Atual do Jogador - {jogador['Atributos']['defesa']}")
+
+          else:
+            time.sleep(1)
+            print("\t!JOGADOR DESVIOU!")
+            time.sleep(0.5)
+            jogador['Atributos']['vida'] -= 0
+            time.sleep(0.5)
+            print(f"Vida Atual do Jogador - {jogador['Atributos']['vida']}")
+
+        #endregion
+
+        print("-" * 50)
+        time.sleep(0.5)
   if jogador['Atributos']['vida'] <= 0:                                 #Morte do Jogador Caso sua vida seja meno igual a 0
     time.sleep(1)
     print("\n\t!VOCE ESTA INCAPACITADO!")
@@ -206,12 +299,12 @@ def Combate(nome,vJogadores,vInimigos):
     time.sleep(0.5)
     print("\n","-=" * 10,"INIMIGO DERROTADO","=-" * 10,"\n")
     time.sleep(2)
-#################Recompensas########################
+    ###############Recompensas########################
     jogador['xp'] += inimigo['xp']
     jogador['Inimigos'] += 1
     goldmonster = random.randint(0,inimigo['gold'])
     jogador['Gold'] += goldmonster
-###################################################
+    #################################################
 
     print(f"Jogador Adquiriu {inimigo['xp']}XP")
     time.sleep(1)
@@ -239,6 +332,7 @@ def Level_up(vJogadores,nome):                                           #Sistem
     print(f"Novos atributos = Vida:{jogador['Atributos']['vida']} / Ataque:{jogador['Atributos']['ataque']}")
     time.sleep(0.5)
     print("-" * 50)
+    jogador['xp']  -= XPnextLevel
 
   save("jogadores.json",vJogadores)
 
@@ -258,16 +352,23 @@ def Game_Inputs():                                                       #Em ger
   
   return op.upper() 
 
-def exploracao():
-  
-  Ambiente = ["Dangeon", "Floresta", "Campos Escuros", "Casa Abandonada"]                               #Sistema Futuro//
+def exploracao(vAmbiente,vJogadores,nome):
 
-  Situacoes = ["Acho Inimigo!" , "Nada Aconteceu" , "Achou um Item", "Caiu em uma Armadilha"]           #Todas as possiveis situacoes que o jogador pode acabar entrando
+  vJogadores[nome]['ambiente'] += 1
+
+  if vJogadores[nome]['ambiente'] == (random.randint(3,10)):
+    
+    ambiente = vAmbiente[str(random.randint(1,4))]['nome']
+    print(f"Voce esta adentrando a ... {ambiente}")
+
+    vJogadores[nome]['ambiente'] = 0
+
+  Situacoes = ["Acho Inimigo!" , "Nada Aconteceu" , "Achou um Item", "Caiu em uma Armadilha", "Achou NPC" , "Achou Comerciante"]           #Todas as possiveis situacoes que o jogador pode acabar entrando
   resultado = random.choice(Situacoes)                                                                  #Escolhe uma situacao da lista de situacoes elaborada acima
   
   return resultado
 
-def controlador(vJogadores,nome,arm,vItens,vInimigos):                   #Controlador chama todas as funcoes de acoes dependendo da escolha do jogador
+def controlador(vJogadores,nome,arm,vItens,vInimigos,vNPC,vComerciantes,vSkills,vAmbiente):                   #Controlador chama todas as funcoes de acoes dependendo da escolha do jogador
   acao = Game_Inputs()
 
   while acao != "0":
@@ -275,12 +376,12 @@ def controlador(vJogadores,nome,arm,vItens,vInimigos):                   #Contro
     if acao == "M":
       print("\nExplorando...")
       time.sleep(random.randint(1,4))
-      situacao = exploracao()
+      situacao = exploracao(vAmbiente,vJogadores,nome)
 
       if situacao == "Acho Inimigo!":                                       #Inicia a funcao de combate do jogador
         print("Voce sente uma presença se aproximando...")
         time.sleep(random.randint(1,4))
-        Combate(nome,vJogadores,vInimigos)
+        Combate(nome,vJogadores,vInimigos,vItens,vSkills)
         acao = Game_Inputs()
 
       elif situacao == "Nada Aconteceu":
@@ -306,13 +407,134 @@ def controlador(vJogadores,nome,arm,vItens,vInimigos):                   #Contro
 
         acao = Game_Inputs()
 
+      elif situacao == "Achou NPC":
+
+        print("Voce sente uma presença se aproximando...")
+
+        time.sleep(random.randint(1,4))
+        NPC = gerador_npc(vNPC)
+
+        print(f"Voce achou um NPC - {NPC['nome']}")
+        time.sleep(0.5)
+        print("Eu preciso te dizer uma coisa...")
+        time.sleep(2.5)
+        print(f"\n\t{NPC['nome']}\n")
+        time.sleep(0.5)
+        print(f"{NPC['Fala-1']}\n")
+        time.sleep(0.5)
+        print("-" * 50)
+        time.sleep(0.5)
+        acao = Game_Inputs()
+
+      elif situacao == "Achou Comerciante":
+
+        print("Voce sente uma presença se aproximando...")
+        time.sleep(random.randint(1,4))
+        Comerciante = gerador_comerciante(vComerciantes)
+
+        if Comerciante['nome'] == "Jhonny o UPGRADE":
+    
+          print(f"Voce achou um Comerciante - {Comerciante['nome']}")
+          time.sleep(0.5)
+          print("-" * 50)
+          time.sleep(0.5)
+          print(f"\n\t{Comerciante['nome']}\n")
+          time.sleep(0.5)
+          print("AE CUMPADE!!! VOU TE DAR UMA MORAL!!!")
+          time.sleep(0.5)
+          print("PELOS PODERES DE OJHONNYYY!!!")
+          time.sleep(0.5)
+
+          if 0 == random.randint(0,1):
+            print("EU TE DOU A FORÇA!!!")
+            vJogadores[nome]['Atributos']['ataque'] += 2
+            save("jogadores.json",vJogadores)
+          else:
+            print("EU TE DOA A CURA!!!")
+            vJogadores[nome]['Atributos']['vida'] += 5
+            save("jogadores.json",vJogadores)
+
+          print("-" * 50)
+          time.sleep(0.5)
+          acao = Game_Inputs()
+
+        else:
+          print(f"Voce achou um Comerciante - {Comerciante['nome']}")
+
+          time.sleep(0.5)
+          print("-" * 50)
+          time.sleep(0.5)
+
+          print(f"\n\t{Comerciante['nome']}\n")
+
+          time.sleep(0.5)
+
+          print(f"{Comerciante['item - 1']} Valor : 2")
+
+          time.sleep(0.5)
+
+          print(f"{Comerciante['item - 2']} Valor : 3\n")
+
+          time.sleep(0.5)
+          print("-" * 50)
+          time.sleep(0.5)
+
+          print("Escolha seu Item (ou digite 0 para cancelar):")
+          time.sleep(0.5)
+          print(f"Gold : {vJogadores[nome]['Gold']}")
+          time.sleep(0.5)
+          print("=" * 50)
+          time.sleep(0.5)
+
+          item_nome = input("---> ")
+          time.sleep(0.5)
+
+          print("-" * 50)
+          time.sleep(0.5)
+
+          if item_nome == "0":
+              acao = Game_Inputs()
+
+          else:
+              if item_nome == Comerciante['item - 1']:
+                if vJogadores[nome]['Gold'] >= 2:                 
+                  item = Comerciante['item - 1']
+                  vJogadores[nome]['Gold'] -= 2
+                  vJogadores[nome]['Itens'].append(item)
+                  save("jogadores.json",vJogadores)
+                  acao = Game_Inputs()
+
+                else:
+                  print("Voce nao possui dinheiro suficiente...")
+                  time.sleep(0.5)
+                  print("Não Tenho tempo para quem nao tem dinheiro!")
+                  time.sleep(0.5)
+                  acao = Game_Inputs()
+                  
+                
+
+              elif item_nome == Comerciante['item - 2']:
+                if vJogadores[nome]['Gold'] >= 3:
+                  item = Comerciante['item - 2']
+                  vJogadores[nome]['Gold'] -= 3
+                  vJogadores[nome]['Itens'].append(item)
+                  save("jogadores.json",vJogadores)
+                  acao = Game_Inputs()
+
+                else:
+                  print("Voce nao possui dinheiro suficiente...")
+                  time.sleep(0.5)
+                  print("Não Tenho tempo para quem nao tem dinheiro!")
+                  time.sleep(0.5)
+                  acao = Game_Inputs()
+
       else:
         item = gerador_itens(vItens)                                        #Adicao de itens a um "Inventario" do jogador
         vJogadores[nome]['Itens'].append(item)
         print(f"Voce achou um - {item}\n")
         save("jogadores.json",vJogadores)
         acao = Game_Inputs()
-        
+          
     if acao == "S":                                                        #Mostra o Status do jogador
       print("\n\t-=-STATUS-=-")
       ficha_jogador(vJogadores,nome)
@@ -351,9 +573,22 @@ def controlador(vJogadores,nome,arm,vItens,vInimigos):                   #Contro
           else:
               print("Item não encontrado.")
 
-    save("jogadores.json",vJogadores)    
+  save("jogadores.json",vJogadores)    
   print("Saindo...")
 
+
+def gerador_npc(vNPC):
+  num = random.randint(1,len(vNPC))
+  print("!NPC AVISTADO!")
+  time.sleep(random.randint(1,3))
+  return vNPC[str(num)].copy()
+
+def gerador_comerciante(vComerciantes):
+  num = random.randint(1,len(vComerciantes))
+  print("!COMERCIANTE AVISTADO!")
+  time.sleep(random.randint(1,3))
+  return vComerciantes[str(num)].copy()
+  
 def gerador_inimigos(vInimigos):                                          #Escolhe um Inimigo do Dicionario de Inimigos
   num = random.randint(1,len(vInimigos))
   print("!INIMIGO AVISTADO!")
@@ -366,24 +601,49 @@ def gerador_itens(vItens):                                                #Escol
   time.sleep(4)
   return vItens[str(num)]
 
-def Listas_Dicionarios():                                                 #Listas de Dicionarios com os principais elementos 
+def Listas_Dicionarios():                                                 #Listas de Dicionarios com os principais elementos
+
+    vAmbiente = {
+        "1" : {"nome" : "Dangeon"},
+        "2" : {"nome" : "Floresta"},
+        "3" : {"nome" : "Campo Escuro"},
+        "4" : {"nome" : "Casa Abandonada"}
+    }
+
+
     vInimigos = {
       
-      "1" : {"nome" : "Zumbi",        "vida" : 10 , "ataque" : 5, "xp" : 10, "gold" : 4},
-      "2" : {"nome" : "Esqueleto",    "vida" : 15 , "ataque" : 10,"xp" : 10, "gold" : 6},
-      "3" : {"nome" : "Mago Sombrio", "vida" : 20 , "ataque" : 15,"xp" : 10, "gold" : 2},
-      "4" : {"nome" : "Bandido",      "vida" : 25 , "ataque" : 20,"xp" : 10, "gold" : 8},
-      "5" : {"nome" : "Louco",        "vida" : 30 , "ataque" : 25,"xp" : 10, "gold" : 10}
+      "1" : {"nome" : "Zumbi",        "vida" : 10 , "ataque" : 5, "xp" : 5, "gold" : 4},
+      "2" : {"nome" : "Esqueleto",    "vida" : 15 , "ataque" : 10,"xp" : 12, "gold" : 6},
+      "3" : {"nome" : "Mago Sombrio", "vida" : 20 , "ataque" : 15,"xp" : 10, "gold" : 7},
+      "4" : {"nome" : "Bandido",      "vida" : 25 , "ataque" : 20,"xp" : 14, "gold" : 8},
+      "5" : {"nome" : "Louco",        "vida" : 30 , "ataque" : 25,"xp" : 20, "gold" : 20}
     }
 
     vItens = {
-      "1" : {"nome" : "Pocao de Cura"   , "Cura"   : 20},
+      "1" : {"nome" : "Pocao de Cura"   , "Cura"   : 20 },
       "2" : {"nome" : "Pocao de Forca"  , "Ataque" : 1.5},
-      "3" : {"nome" : "Pocao de Negacao de Dano"},
+      "3" : {"nome" : "Totem de Negacao de Dano"},
       "4" : {"nome" : "Bomba"           , "Ataque" : 25},
       "5" : {"nome" : "Arco"            ,  "Ataque": 1.1},
       "6" : {"nome" : "Espada"          , "Ataque" : 1.2},
       "7" : {"nome" : "Escudo"          , "Defesa" : 1.2}
+    }
+
+    vComerciantes = {
+        "1" : {"nome" : "Robert O comerciante", "item - 1" : vItens['1'],"item - 2" : vItens['4'] },
+        "2" : {"nome" : "Gilbert O  Armoreiro", "item - 1" : vItens['6'],"item - 2" : vItens['5'] },
+        "3" : {"nome" : "Venis o Alquimista",   "item - 1" : vItens['1'],"item - 2" : vItens['2'] },
+        "4" : {"nome" : "Jhonny o UPGRADE"}
+        
+    }
+
+    vNPC = {
+        "1" : {"nome" : "Jorjinho", "Fala-1" : "Opa Amigo! Sabe onde fica o Banheiro?"},
+        "2" : {"nome" : "Jhonny" ,  "Fala-1" : "É O JHONYYY!" },
+        "3" : {"nome" : "Carpina" ,  "Fala-1" : "Como que eu sobrevivo assim eim?"},
+        "4" : {"nome" : "Inimigo" ,  "Fala-1" : "Eu nao ataco nao piah!" }
+
     }
 
     vSkills = {
@@ -397,10 +657,10 @@ def Listas_Dicionarios():                                                 #Lista
 
     vClasse = {
       
-      "Guerreiro" : {"vida" : 20 , "ataque" : 5 },
-      "Mago"      : {"vida" : 10 , "ataque" : 15},
-      "Assassino"  : {"vida" : 5  , "ataque" : 20},
-      "Arqueiro"  : {"vida" : 15 , "ataque" : 10}
+      "Guerreiro" : {"vida" : 20 , "ataque" : 5 , "defesa" : 6 },
+      "Mago"      : {"vida" : 10 , "ataque" : 15, "defesa" : 0 },
+      "Assassino"  : {"vida":  5 , "ataque" : 20, "defesa" : 2 },
+      "Arqueiro"  : {"vida" : 15 , "ataque" : 10, "defesa" : 3 }
 
     }
     
@@ -408,6 +668,9 @@ def Listas_Dicionarios():                                                 #Lista
     save("inimigos.json",vInimigos)
     save("itens.json",vItens)
     save("skills.json",vSkills)
+    save("comerciantes.json",vComerciantes)
+    save("npc.json",vNPC)
+    save("ambiente.json",vAmbiente)
 
 #region CADASTRO/FUNCOES DE MENU
 
@@ -428,6 +691,8 @@ def ficha_jogador(vJogadores,nome):                                       #Ficha
   print("\tClasse: ",vJogadores[nome]["Classe"])
   time.sleep(0.5)
   print("\tVida: "  ,vJogadores[nome]["Atributos"]["vida"])
+  time.sleep(0.5)
+  print("\tDefesa: ",vJogadores[nome]["Atributos"]["defesa"])
   time.sleep(0.5)
   print("\tAtaque: ",vJogadores[nome]["Atributos"]["ataque"])
   time.sleep(0.5)
@@ -540,6 +805,7 @@ def cad_player(vJogadores,vClasse,vSkills):                               #Cadas
         "Skills" : vSkills[classe].copy(),                    #Faz uma copia das listas de dicionario de vSkills para nao alterar os valores para outros jogadores
         "Atributos" : vClasse[classe].copy(),                 #Faz uma copia das listas de dicionario de vClasse para nao alterar os valores para outros jogadores  
         "Inimigos" : 0,
+        "ambiente" : 0,
         "Itens" : []
   }
 #################################################
@@ -589,6 +855,8 @@ def main():
   vItens = load("itens.json")
   vAmbiente = load("ambiente.json")         #Sistema Futuro
   vSkills = load("skills.json")
+  vComerciantes = load("comerciantes.json")
+  vNPC = load("npc.json")
 
  #endregion
 
@@ -615,7 +883,13 @@ def main():
       time.sleep(0.5)
       print("=-" * 25)
       time.sleep(0.5)
-      controlador(vJogadores,nome,arm,vItens,vInimigos)
+      print(f"\n\tOlá {nome}!")
+      time.sleep(0.5)
+      print(f"Nesse momento voce esta adentrando a... {vAmbiente[str(random.randint(1,4))]['nome']}\n")
+      time.sleep(0.5)
+      print("=-" * 25)
+      time.sleep(0.5)
+      controlador(vJogadores,nome,arm,vItens,vInimigos,vNPC,vComerciantes,vSkills,vAmbiente)
       menu()
       op = op_()
 ###############################################################################
