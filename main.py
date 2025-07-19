@@ -133,6 +133,7 @@ def Combate(nome,vJogadores,vInimigos,vItens,vSkills):
         if item_nome == "0":
             print("Jogador não escolhe nenhum item e o jogo avança")
         else:
+
             item_encontrado = None
             for i in jogador['Itens']:
                 if i['nome'] == item_nome:
@@ -155,10 +156,11 @@ def Combate(nome,vJogadores,vInimigos,vItens,vSkills):
             else:
                 print("Item não encontrado.")
     else:
-
+      totem_encontrado = False
       for i in jogador['Itens']:
         
         if i['nome'] == "Totem de Negacao de Dano":
+          totem_encontrado = True
           time.sleep(0.5)
           print("\n-=-Inimigo saiu na Frente-=-")
           time.sleep(random.randint(1,3))
@@ -171,9 +173,9 @@ def Combate(nome,vJogadores,vInimigos,vItens,vSkills):
           jogador['Itens'].remove(i)
           print('-=- Item - Totem de Negacao de Dano foi Utilizado -=-')
           time.sleep(0.5)
-          return
+          break
 
-        else:
+      if not totem_encontrado:
           time.sleep(0.5)
           print("\n-=-Inimigo saiu na Frente-=-")
           time.sleep(0.5)
@@ -289,8 +291,8 @@ def Combate(nome,vJogadores,vInimigos,vItens,vSkills):
 
         #endregion
 
-        print("-" * 50)
-        time.sleep(0.5)
+      print("-" * 50)
+      time.sleep(0.5)
   if jogador['Atributos']['vida'] <= 0:                                 #Morte do Jogador Caso sua vida seja meno igual a 0
     time.sleep(1)
     print("\n\t!VOCE ESTA INCAPACITADO!")
