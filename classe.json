@@ -1,18 +1,22 @@
 {
      "Guerreiro": {
           "vida": 20,
-          "ataque": 5
+          "ataque": 5,
+          "defesa": 6
      },
      "Mago": {
           "vida": 10,
-          "ataque": 15
+          "ataque": 15,
+          "defesa": 0
      },
      "Assassino": {
           "vida": 5,
-          "ataque": 20
+          "ataque": 20,
+          "defesa": 2
      },
      "Arqueiro": {
           "vida": 15,
-          "ataque": 10
+          "ataque": 10,
+          "defesa": 3
      }
 }

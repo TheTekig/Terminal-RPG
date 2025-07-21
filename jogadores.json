@@ -25,5 +25,26 @@
                     "nome": "Pocao de Negacao de Dano"
                }
           ]
+     },
+     "Diogo": {
+          "Nome": "Diogo",
+          "Idade": "21",
+          "Gold": 0,
+          "xp": 0,
+          "lvl": 1,
+          "Classe": "Guerreiro",
+          "Skills": {
+               "Slash": 1.5,
+               "Porrada": 1.1,
+               "Aumentar Defesa": 1.2
+          },
+          "Atributos": {
+               "vida": 20,
+               "ataque": 5,
+               "defesa": 6
+          },
+          "Inimigos": 0,
+          "ambiente": 0,
+          "Itens": []
      }
 }

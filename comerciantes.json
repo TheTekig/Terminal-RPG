@@ -1,0 +1,38 @@
+{
+     "1": {
+          "nome": "Robert O comerciante",
+          "item - 1": {
+               "nome": "Pocao de Cura",
+               "Cura": 20
+          },
+          "item - 2": {
+               "nome": "Bomba",
+               "Ataque": 25
+          }
+     },
+     "2": {
+          "nome": "Gilbert O  Armoreiro",
+          "item - 1": {
+               "nome": "Espada",
+               "Ataque": 1.2
+          },
+          "item - 2": {
+               "nome": "Arco",
+               "Ataque": 1.1
+          }
+     },
+     "3": {
+          "nome": "Venis o Alquimista",
+          "item - 1": {
+               "nome": "Pocao de Cura",
+               "Cura": 20
+          },
+          "item - 2": {
+               "nome": "Pocao de Forca",
+               "Ataque": 1.5
+          }
+     },
+     "4": {
+          "nome": "Jhonny o UPGRADE"
+     }
+}
