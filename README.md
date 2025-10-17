@@ -32,15 +32,6 @@ Terminal-RPG é um jogo de RPG de console desenvolvido em <b>Python</b>, com exp
 
 ---
 
-## 🛠 Tecnologias
-
-<div align="center">
-  <img src="https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/JSON-FFA500?logo=json&logoColor=white" alt="JSON">
-</div>
-
----
-
 ## 🎮 Como Jogar
 
 <ol>
@@ -61,16 +52,6 @@ cd Terminal-RPG</code></pre>
     </ul>
   </li>
 </ol>
-
----
-
-## 📸 Screenshots
-
-<div align="center">
-  <img src="docs/screenshot1.png" alt="Menu inicial" width="400"/>
-  <img src="docs/screenshot2.png" alt="Combate" width="400"/>
-  <img src="docs/screenshot3.png" alt="Exploração" width="400"/>
-</div>
 
 ---
 
