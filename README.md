@@ -87,14 +87,6 @@ Terminal-RPG/
 
 ---
 
-## 📄 Licença
-
-<p align="center">
-Este projeto está licenciado sob a <a href="LICENSE">MIT License</a>.
-</p>
-
----
-
 ## 🤝 Contribuição
 
 <p align="center">
