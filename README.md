@@ -1,4 +1,4 @@
-# 🎮 Terminal-RPG
+<h1 align="center"> Terminal-RPG </h1>
 
 <div align="center">
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white" alt="Python"></a>
